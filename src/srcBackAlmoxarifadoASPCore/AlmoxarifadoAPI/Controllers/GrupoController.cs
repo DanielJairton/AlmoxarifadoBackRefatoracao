@@ -24,9 +24,10 @@ namespace AlmoxarifadoAPI.Controllers
                 var grupos = _grupoService.ObterTodosGrupos();
                 return Ok(grupos);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, $"Ocorreu um erro ao acessar os dados. Por favor, tente novamente mais tarde.\nErro:{ex}");
+
+                return StatusCode(500, "Ocorreu um erro ao acessar os dados. Por favor, tente novamente mais tarde.");
             }
          
         }
@@ -43,9 +44,10 @@ namespace AlmoxarifadoAPI.Controllers
                 }
                 return Ok(grupo);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, $"Ocorreu um erro ao acessar os dados. Por favor, tente novamente mais tarde.\nErro:{ex}");
+
+                return StatusCode(500, "Ocorreu um erro ao acessar os dados. Por favor, tente novamente mais tarde.");
             }
 
         }
@@ -58,9 +60,10 @@ namespace AlmoxarifadoAPI.Controllers
                  var grupoSalvo = _grupoService.CriarGrupo(grupo);
                   return Ok(grupoSalvo);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode(500, $"Ocorreu um erro ao acessar os dados. Por favor, tente novamente mais tarde.\nErro:{ex}");
+
+                return StatusCode(500, "Ocorreu um erro ao acessar os dados. Por favor, tente novamente mais tarde.");
             }
         }
     }

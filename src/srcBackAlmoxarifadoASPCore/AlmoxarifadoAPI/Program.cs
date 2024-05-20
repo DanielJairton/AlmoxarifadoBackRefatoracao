@@ -13,6 +13,14 @@ builder.Services.AddDbContext<ContextSQL>(options =>
 //Carregando Classes de Repositories
 builder.Services.AddScoped<GrupoService>();
 builder.Services.AddScoped<IGrupoRepository,GrupoRepository>();
+builder.Services.AddScoped<NotaFiscalService>();
+builder.Services.AddScoped<INotaFiscalRepository, NotaFiscalRepository>();
+builder.Services.AddScoped<ItensNotaService>();
+builder.Services.AddScoped<IItensNotaRepository, ItensNotaRepository>();
+builder.Services.AddScoped<RequisicaoService>();
+builder.Services.AddScoped<IRequisicaoRepository, RequisicaoRepository>();
+builder.Services.AddScoped<ItensRequerimentoService>();
+builder.Services.AddScoped<IItensRequerimentoRepository, ItensRequerimentoRepository>();
 
 
 
