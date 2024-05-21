@@ -11,10 +11,12 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
     public class ItensRequerimentoRepository : IItensRequerimentoRepository
     {
         private readonly ContextSQL _context;
+        private readonly EstoqueRepository _estoqueRepository;
 
         public ItensRequerimentoRepository(ContextSQL context)
         {
             _context = context;
+            _estoqueRepository = new EstoqueRepository(context);
         }
 
         public List<ItensRequerimento> ObterTodosItensRequerimentos()
@@ -47,44 +49,65 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
                     TOTAL_REAL = e.TOTAL_REAL
                 }).ToList().First(x => x.NUM_ITEM == num_Item && x.ID_PRO == id_Pro && x.ID_REQ == id_Req && x.ID_SEC == id_Sec);
         }
-        public ItensRequerimento CriarItensRequerimento(ItensRequerimento itensRequerimento)
+        public ItensRequerimento CriarItensRequerimento(ItensRequerimento itensReq)
         {
-            _context.Itens_Req.Add(itensRequerimento);
+            _context.Itens_Req.Add(itensReq);
             _context.SaveChanges();
-            return itensRequerimento;
+
+            _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, itensReq.QTD_PRO);
+
+            return itensReq;
         }
-        public ItensRequerimento AtualizarItensRequerimento(int num_Item, int id_Pro, int id_Req, int id_Sec, ItensRequerimento itensRequerimento)
+        public ItensRequerimento AtualizarItensRequerimento(int num_Item, int id_Pro, int id_Req, int id_Sec, ItensRequerimento itensReq)
         {
-            ItensRequerimento itensRequerimentoAtualizado = _context.Itens_Req.Find(num_Item, id_Pro, id_Req, id_Sec);
-            if (itensRequerimentoAtualizado == null)
+            ItensRequerimento itensReqAtualizado = _context.Itens_Req.Find(num_Item, id_Pro, id_Req, id_Sec);
+            if (itensReqAtualizado == null)
             {
                 throw new KeyNotFoundException("Item de requerimento com esses IDs não encontrado.");
             }
-            itensRequerimentoAtualizado.NUM_ITEM = itensRequerimento.NUM_ITEM;
-            itensRequerimentoAtualizado.ID_PRO = itensRequerimento.ID_PRO;
-            itensRequerimentoAtualizado.ID_REQ = itensRequerimento.ID_REQ;
-            itensRequerimentoAtualizado.ID_SEC = itensRequerimento.ID_SEC;
-            itensRequerimentoAtualizado.QTD_PRO = itensRequerimento.QTD_PRO;
-            itensRequerimentoAtualizado.PRE_UNIT = itensRequerimento.PRE_UNIT;
-            itensRequerimentoAtualizado.TOTAL_ITEM = itensRequerimento.TOTAL_ITEM;
-            itensRequerimentoAtualizado.TOTAL_REAL = itensRequerimento.TOTAL_REAL;
+
+            decimal quantidadeAtual = itensReqAtualizado.QTD_PRO;
+            decimal quantidadeNova = itensReq.QTD_PRO;
+
+            itensReqAtualizado.NUM_ITEM = itensReq.NUM_ITEM;
+            itensReqAtualizado.ID_PRO = itensReq.ID_PRO;
+            itensReqAtualizado.ID_REQ = itensReq.ID_REQ;
+            itensReqAtualizado.ID_SEC = itensReq.ID_SEC;
+            itensReqAtualizado.QTD_PRO = itensReq.QTD_PRO;
+            itensReqAtualizado.PRE_UNIT = itensReq.PRE_UNIT;
+            itensReqAtualizado.TOTAL_ITEM = itensReq.TOTAL_ITEM;
+            itensReqAtualizado.TOTAL_REAL = itensReq.TOTAL_REAL;
 
             _context.SaveChanges();
 
-            return itensRequerimentoAtualizado;
+            if (quantidadeAtual > 0 && quantidadeNova > 0)
+            {
+                if (quantidadeAtual < quantidadeNova)
+                {
+                    decimal diferencaQtd = quantidadeNova - quantidadeAtual;
+                    _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, diferencaQtd);
+                }
+                else if (quantidadeAtual > quantidadeNova)
+                {
+                    decimal diferencaQtd = quantidadeAtual - quantidadeNova;
+                    _estoqueRepository.AumentarEstoque(itensReq.ID_SEC, itensReq.ID_PRO, diferencaQtd);
+                }
+            }
+
+            return itensReqAtualizado;
         }
         public ItensRequerimento DeletarItensRequerimento(int num_Item, int id_Pro, int id_Req, int id_Sec)
         {
-            ItensRequerimento itensRequerimento = _context.Itens_Req.Find(num_Item, id_Pro, id_Req, id_Sec);
-            if (itensRequerimento == null )
+            ItensRequerimento itensReq = _context.Itens_Req.Find(num_Item, id_Pro, id_Req, id_Sec);
+            if (itensReq == null )
             {
                 throw new KeyNotFoundException("Item de requerimento com esses IDs não encontrado.");
             }
 
-            _context.Itens_Req.Remove(itensRequerimento);
+            _context.Itens_Req.Remove(itensReq);
             _context.SaveChanges();
 
-            return itensRequerimento;
+            return itensReq;
         }
     }
 }

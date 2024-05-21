@@ -64,25 +64,6 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
         }
         public NotaFiscal CriarNotaFiscal(NotaFiscal notaFiscal)
         {
-            //using (var transaction = _context.Database.BeginTransaction())
-            //{
-            //    try
-            //    {
-            //        _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT NOTA_FISCAL ON");
-
-            //        _context.Nota_Fiscal.Add(notaFiscal);
-            //        _context.SaveChanges();
-
-            //        transaction.Commit();
-
-            //        _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT NOTA_FISCAL OFF");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        transaction.Rollback();
-            //        throw new Exception("Erro ao criar a nota fiscal. Consulte o log para mais detalhes.", ex);
-            //    }
-            //}
             _context.Nota_Fiscal.Add(notaFiscal);
             _context.SaveChanges();
             return notaFiscal;

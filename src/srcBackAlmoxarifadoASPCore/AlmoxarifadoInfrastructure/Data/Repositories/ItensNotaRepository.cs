@@ -12,10 +12,12 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
     public class ItensNotaRepository : IItensNotaRepository
     {
         private readonly ContextSQL _context;
+        private readonly EstoqueRepository _estoqueRepository;
 
         public ItensNotaRepository(ContextSQL context)
         {
             _context = context;
+            _estoqueRepository = new EstoqueRepository(context);
         }
 
         public List<ItensNota> ObterTodosItensNota()
@@ -47,36 +49,25 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
         }
         public ItensNota CriarItensNota(ItensNota itensNota)
         {
-            //using (var transaction = _context.Database.BeginTransaction())
-            //{
-            //    try
-            //    {
-            //        _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT ITENS_NOTA ON");
-
-            //        _context.Itens_Nota.Add(itensNota);
-            //        _context.SaveChanges();
-
-            //        transaction.Commit();
-
-            //        _context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT ITENS_NOTA OFF");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        transaction.Rollback();
-            //        throw new Exception("Erro ao criar o item da nota. Consulte o log para mais detalhes.", ex);
-            //    }
-            //}
             _context.Itens_Nota.Add(itensNota);
             _context.SaveChanges();
+
+            _estoqueRepository.AumentarEstoque(itensNota.ID_SEC, itensNota.ID_PRO, itensNota.QTD_PRO);
+
             return itensNota;
         }
         public ItensNota AtualizarItensNota(int item_Num, int id_Pro, int id_Nota, int id_Sec, ItensNota itensNota)
         {
             ItensNota itensNotaExistente = _context.Itens_Nota.Find(item_Num, id_Pro, id_Nota, id_Sec);
+
             if (itensNotaExistente == null)
             {
                 throw new KeyNotFoundException($"ItensNota não encontraddo com ITEM_NUM:{item_Num} ID_PRO:{id_Pro} ID_NOTA:{id_Nota} ID_SEC:{id_Sec}");
             }
+
+            decimal quantidadeAtual = itensNotaExistente.QTD_PRO ?? 0;
+            decimal quantidadeNova = itensNota.QTD_PRO ?? 0;
+
             itensNotaExistente.ITEM_NUM = itensNota.ITEM_NUM;
             itensNotaExistente.ID_PRO = itensNota.ID_PRO;
             itensNotaExistente.ID_NOTA = itensNota.ID_NOTA;
@@ -87,6 +78,20 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
             itensNotaExistente.EST_LIN = itensNota.EST_LIN;
 
             _context.SaveChanges();
+
+            if (quantidadeAtual > 0 && quantidadeNova >0)
+            {
+                if (quantidadeAtual > quantidadeNova)
+                {
+                    decimal diferencaQtd = quantidadeAtual - quantidadeNova;
+                    _estoqueRepository.DiminuirEstoque(itensNota.ID_SEC, itensNota.ID_PRO, diferencaQtd);
+                }
+                else if (quantidadeAtual < quantidadeNova)
+                {
+                    decimal diferencaQtd = quantidadeNova - quantidadeAtual;
+                    _estoqueRepository.AumentarEstoque(itensNota.ID_SEC, itensNota.ID_PRO, diferencaQtd);
+                }
+            }
 
             return itensNotaExistente;
         }

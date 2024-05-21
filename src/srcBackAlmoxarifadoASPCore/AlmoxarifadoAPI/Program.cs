@@ -21,6 +21,7 @@ builder.Services.AddScoped<RequisicaoService>();
 builder.Services.AddScoped<IRequisicaoRepository, RequisicaoRepository>();
 builder.Services.AddScoped<ItensRequerimentoService>();
 builder.Services.AddScoped<IItensRequerimentoRepository, ItensRequerimentoRepository>();
+builder.Services.AddScoped<IEstoqueRepository, EstoqueRepository>();
 
 
 
