@@ -53,7 +53,7 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
         {
             try
             {
-                Estoque estoque = _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, itensReq.QTD_PRO);
+                Estoque estoque = _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, itensReq.QTD_PRO, itensReq.ID_REQ, Enum.EnumTipoTransacao.Requisicao);
 
                 _context.Itens_Req.Add(itensReq);
                 _context.SaveChanges();
@@ -83,7 +83,7 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
                     if (quantidadeAtual < quantidadeNova)
                     {
                         decimal diferencaQtd = quantidadeNova - quantidadeAtual;
-                        _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, diferencaQtd);
+                        _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, diferencaQtd, itensReq.ID_REQ, Enum.EnumTipoTransacao.Requisicao);
                     }
                     else if (quantidadeAtual > quantidadeNova)
                     {

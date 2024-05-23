@@ -75,7 +75,7 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
                     if (quantidadeAtual > quantidadeNova)
                     {
                         decimal diferencaQtd = quantidadeAtual - quantidadeNova;
-                        _estoqueRepository.DiminuirEstoque(itensNota.ID_SEC, itensNota.ID_PRO, diferencaQtd);
+                        _estoqueRepository.DiminuirEstoque(itensNota.ID_SEC, itensNota.ID_PRO, diferencaQtd, id_Nota, Enum.EnumTipoTransacao.Nota_Fiscal);
                     }
                     else if (quantidadeAtual < quantidadeNova)
                     {

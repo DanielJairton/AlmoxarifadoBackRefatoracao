@@ -58,3 +58,18 @@ E:\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\Almoxarifad
 E:\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\refint\AlmoxarifadoInfrastructure.dll
 E:\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\AlmoxarifadoInfrastructure.pdb
 E:\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\ref\AlmoxarifadoInfrastructure.dll
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\bin\Debug\net6.0\AlmoxarifadoInfrastructure.deps.json
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\bin\Debug\net6.0\AlmoxarifadoInfrastructure.dll
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\bin\Debug\net6.0\AlmoxarifadoInfrastructure.pdb
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\bin\Debug\net6.0\AlmoxarifadoDomain.dll
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\bin\Debug\net6.0\AlmoxarifadoDomain.pdb
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\AlmoxarifadoInfrastructure.csproj.AssemblyReference.cache
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\AlmoxarifadoInfrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\AlmoxarifadoInfrastructure.AssemblyInfoInputs.cache
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\AlmoxarifadoInfrastructure.AssemblyInfo.cs
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\AlmoxarifadoInfrastructure.csproj.CoreCompileInputs.cache
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\Almoxari.098DBE06.Up2Date
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\AlmoxarifadoInfrastructure.dll
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\refint\AlmoxarifadoInfrastructure.dll
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\AlmoxarifadoInfrastructure.pdb
+E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoInfrastructure\obj\Debug\net6.0\ref\AlmoxarifadoInfrastructure.dll
