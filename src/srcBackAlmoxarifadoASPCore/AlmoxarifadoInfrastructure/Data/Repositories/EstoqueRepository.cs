@@ -39,10 +39,15 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
 
         public Estoque DiminuirEstoque(int id_Sec, int id_Pro, decimal? qtdPro)
         {
-            if (qtdPro.HasValue && qtdPro > 0)
+            if (qtdPro.HasValue && qtdPro >= 0)
             {
                 Estoque estoque = _context.Estoque.Find(id_Sec, id_Pro)
                     ?? throw new KeyNotFoundException($"Estoque não encontraddo com ID_SEC:{id_Sec} ID_PRO:{id_Pro}");
+
+                if (qtdPro == 0)
+                {
+                    return estoque;
+                }
 
                 if (estoque.QTD_PRO >= qtdPro)
                 {

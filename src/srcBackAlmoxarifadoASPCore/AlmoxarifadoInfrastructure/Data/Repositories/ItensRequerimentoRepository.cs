@@ -51,12 +51,19 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
         }
         public ItensRequerimento CriarItensRequerimento(ItensRequerimento itensReq)
         {
-            _context.Itens_Req.Add(itensReq);
-            _context.SaveChanges();
+            try
+            {
+                Estoque estoque = _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, itensReq.QTD_PRO);
 
-            _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, itensReq.QTD_PRO);
+                _context.Itens_Req.Add(itensReq);
+                _context.SaveChanges();
 
-            return itensReq;
+                return itensReq;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public ItensRequerimento AtualizarItensRequerimento(int num_Item, int id_Pro, int id_Req, int id_Sec, ItensRequerimento itensReq)
         {
@@ -66,8 +73,29 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
                 throw new KeyNotFoundException("Item de requerimento com esses IDs não encontrado.");
             }
 
-            decimal quantidadeAtual = itensReqAtualizado.QTD_PRO;
-            decimal quantidadeNova = itensReq.QTD_PRO;
+            try
+            {
+                decimal quantidadeAtual = itensReqAtualizado.QTD_PRO;
+                decimal quantidadeNova = itensReq.QTD_PRO;
+
+                if (quantidadeAtual >= 0 && quantidadeNova >= 0)
+                {
+                    if (quantidadeAtual < quantidadeNova)
+                    {
+                        decimal diferencaQtd = quantidadeNova - quantidadeAtual;
+                        _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, diferencaQtd);
+                    }
+                    else if (quantidadeAtual > quantidadeNova)
+                    {
+                        decimal diferencaQtd = quantidadeAtual - quantidadeNova;
+                        _estoqueRepository.AumentarEstoque(itensReq.ID_SEC, itensReq.ID_PRO, diferencaQtd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             itensReqAtualizado.NUM_ITEM = itensReq.NUM_ITEM;
             itensReqAtualizado.ID_PRO = itensReq.ID_PRO;
@@ -79,20 +107,6 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
             itensReqAtualizado.TOTAL_REAL = itensReq.TOTAL_REAL;
 
             _context.SaveChanges();
-
-            if (quantidadeAtual > 0 && quantidadeNova > 0)
-            {
-                if (quantidadeAtual < quantidadeNova)
-                {
-                    decimal diferencaQtd = quantidadeNova - quantidadeAtual;
-                    _estoqueRepository.DiminuirEstoque(itensReq.ID_SEC, itensReq.ID_PRO, diferencaQtd);
-                }
-                else if (quantidadeAtual > quantidadeNova)
-                {
-                    decimal diferencaQtd = quantidadeAtual - quantidadeNova;
-                    _estoqueRepository.AumentarEstoque(itensReq.ID_SEC, itensReq.ID_PRO, diferencaQtd);
-                }
-            }
 
             return itensReqAtualizado;
         }

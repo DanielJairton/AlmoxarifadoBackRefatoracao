@@ -65,8 +65,29 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
                 throw new KeyNotFoundException($"ItensNota não encontraddo com ITEM_NUM:{item_Num} ID_PRO:{id_Pro} ID_NOTA:{id_Nota} ID_SEC:{id_Sec}");
             }
 
-            decimal quantidadeAtual = itensNotaExistente.QTD_PRO ?? 0;
-            decimal quantidadeNova = itensNota.QTD_PRO ?? 0;
+            try
+            {
+                decimal quantidadeAtual = itensNotaExistente.QTD_PRO ?? 0;
+                decimal quantidadeNova = itensNota.QTD_PRO ?? 0;
+
+                if (quantidadeAtual >= 0 && quantidadeNova >= 0)
+                {
+                    if (quantidadeAtual > quantidadeNova)
+                    {
+                        decimal diferencaQtd = quantidadeAtual - quantidadeNova;
+                        _estoqueRepository.DiminuirEstoque(itensNota.ID_SEC, itensNota.ID_PRO, diferencaQtd);
+                    }
+                    else if (quantidadeAtual < quantidadeNova)
+                    {
+                        decimal diferencaQtd = quantidadeNova - quantidadeAtual;
+                        _estoqueRepository.AumentarEstoque(itensNota.ID_SEC, itensNota.ID_PRO, diferencaQtd);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             itensNotaExistente.ITEM_NUM = itensNota.ITEM_NUM;
             itensNotaExistente.ID_PRO = itensNota.ID_PRO;
@@ -78,20 +99,6 @@ namespace AlmoxarifadoInfrastructure.Data.Repositories
             itensNotaExistente.EST_LIN = itensNota.EST_LIN;
 
             _context.SaveChanges();
-
-            if (quantidadeAtual > 0 && quantidadeNova >0)
-            {
-                if (quantidadeAtual > quantidadeNova)
-                {
-                    decimal diferencaQtd = quantidadeAtual - quantidadeNova;
-                    _estoqueRepository.DiminuirEstoque(itensNota.ID_SEC, itensNota.ID_PRO, diferencaQtd);
-                }
-                else if (quantidadeAtual < quantidadeNova)
-                {
-                    decimal diferencaQtd = quantidadeNova - quantidadeAtual;
-                    _estoqueRepository.AumentarEstoque(itensNota.ID_SEC, itensNota.ID_PRO, diferencaQtd);
-                }
-            }
 
             return itensNotaExistente;
         }
