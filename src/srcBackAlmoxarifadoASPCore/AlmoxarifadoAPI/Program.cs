@@ -1,14 +1,15 @@
+using AlmoxarifadoAPI;
 using AlmoxarifadoInfrastructure.Data;
 using AlmoxarifadoInfrastructure.Data.Interfaces;
 using AlmoxarifadoInfrastructure.Data.Repositories;
 using AlmoxarifadoServices;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<ContextSQL>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoDBSQL")));
+AddDbContextFlexivel(builder);
 
 //Carregando Classes de Repositories
 builder.Services.AddScoped<GrupoService>();
@@ -49,3 +50,35 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+void AddDbContextFlexivel(WebApplicationBuilder builder)
+{
+    List<string> connectionStrings = builder.Configuration.GetSection("ConnectionStrings").GetChildren()
+                                          .Select(cs => cs.Key).ToList();
+
+    foreach (string connectionString in connectionStrings)
+    {
+        try
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<ContextSQL>();
+            optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString(connectionString));
+
+            using (var context = (ContextSQL)Activator.CreateInstance(typeof(ContextSQL), optionsBuilder.Options))
+            {
+                if (context.Database.CanConnect())
+                {
+                    builder.Services.AddDbContext<ContextSQL>(options =>
+                        options.UseSqlServer(builder.Configuration.GetConnectionString(connectionString)));
+                    Console.WriteLine($"Conexão bem sucedida usando {connectionString}");
+                    return;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Falha ao conectar usando {connectionString}: {ex.Message}");
+        }
+    }
+
+    throw new Exception("Não foi possível conectar ao banco de dados usando as strings de conexão fornecidas.");
+}

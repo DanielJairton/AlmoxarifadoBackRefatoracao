@@ -42,14 +42,3 @@ E:\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\Almoxarifad
 E:\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\refint\AlmoxarifadoDomain.dll
 E:\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\AlmoxarifadoDomain.pdb
 E:\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\ref\AlmoxarifadoDomain.dll
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\bin\Debug\net6.0\AlmoxarifadoDomain.deps.json
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\bin\Debug\net6.0\AlmoxarifadoDomain.dll
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\bin\Debug\net6.0\AlmoxarifadoDomain.pdb
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\AlmoxarifadoDomain.GeneratedMSBuildEditorConfig.editorconfig
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\AlmoxarifadoDomain.AssemblyInfoInputs.cache
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\AlmoxarifadoDomain.AssemblyInfo.cs
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\AlmoxarifadoDomain.csproj.CoreCompileInputs.cache
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\AlmoxarifadoDomain.dll
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\refint\AlmoxarifadoDomain.dll
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\AlmoxarifadoDomain.pdb
-E:\Almoxarifado(Entrega 04)\Almoxarifado\almoxarifadoback-main\src\srcBackAlmoxarifadoASPCore\AlmoxarifadoDomain\obj\Debug\net6.0\ref\AlmoxarifadoDomain.dll
