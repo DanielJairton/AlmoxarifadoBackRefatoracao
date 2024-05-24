@@ -19,9 +19,20 @@ namespace AlmoxarifadoInfrastructure.Data
         {
             // Configuração da chave primária para a entidade Grupo
             modelBuilder.Entity<Grupo>().HasKey(g => g.ID_GRU);
+            modelBuilder.Entity<NotaFiscal>().HasKey(e => e.ID_NOTA);
+            modelBuilder.Entity<ItensNota>().HasKey(e => new {e.ITEM_NUM, e.ID_PRO,e.ID_NOTA, e.ID_SEC});
+            modelBuilder.Entity<Requisicao>().HasKey(e => e.ID_REQ);
+            modelBuilder.Entity<ItensRequerimento>().HasKey(e => new {e.NUM_ITEM, e.ID_PRO, e.ID_REQ, e.ID_SEC});
+            modelBuilder.Entity<Estoque>().HasKey(e => new { e.ID_SEC, e.ID_PRO });
+            modelBuilder.Entity<Produto>().HasKey(e => e.ID_PRO);
         }
 
-
         public DbSet<Grupo> Grupo { get; set; }
+        public DbSet<NotaFiscal> Nota_Fiscal { get; set; }
+        public DbSet<ItensNota> Itens_Nota { get; set; }
+        public DbSet<Requisicao> Requisicao { get; set;}
+        public DbSet<ItensRequerimento> Itens_Req { get; set; }
+        public DbSet<Estoque> Estoque { get; set; }
+        public DbSet<Produto> Produto { get; set; }
     }
 }
